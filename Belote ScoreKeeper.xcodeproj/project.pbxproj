@@ -1,0 +1,397 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		0CA26E177E3A3F719D7C6884 /* Pods_Belote_ScoreKeeper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 022BFEDA1979A25D0B964BA0 /* Pods_Belote_ScoreKeeper.framework */; };
+		DB4FA2E11C673EAB00E57557 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4FA2E01C673EAB00E57557 /* AppDelegate.swift */; };
+		DB4FA2E61C673EAB00E57557 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DB4FA2E41C673EAB00E57557 /* Main.storyboard */; };
+		DB4FA2E81C673EAB00E57557 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DB4FA2E71C673EAB00E57557 /* Assets.xcassets */; };
+		DB4FA2EB1C673EAB00E57557 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DB4FA2E91C673EAB00E57557 /* LaunchScreen.storyboard */; };
+		DBCEE2261C71AA84001461E0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCEE2251C71AA84001461E0 /* ViewController.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		022BFEDA1979A25D0B964BA0 /* Pods_Belote_ScoreKeeper.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Belote_ScoreKeeper.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		88CD1BD5E9537483249B350A /* Pods-Belote ScoreKeeper.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Belote ScoreKeeper.release.xcconfig"; path = "Pods/Target Support Files/Pods-Belote ScoreKeeper/Pods-Belote ScoreKeeper.release.xcconfig"; sourceTree = "<group>"; };
+		A0B49EBEC8DC2B8DABBB53E6 /* Pods-Belote ScoreKeeper.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Belote ScoreKeeper.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Belote ScoreKeeper/Pods-Belote ScoreKeeper.debug.xcconfig"; sourceTree = "<group>"; };
+		DB4FA2DD1C673EAB00E57557 /* Belote ScoreKeeper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Belote ScoreKeeper.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		DB4FA2E01C673EAB00E57557 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		DB4FA2E51C673EAB00E57557 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		DB4FA2E71C673EAB00E57557 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		DB4FA2EA1C673EAB00E57557 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		DB4FA2EC1C673EAB00E57557 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DBCEE2251C71AA84001461E0 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		DBCEE2271C71BB30001461E0 /* Podfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		DB4FA2DA1C673EAB00E57557 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0CA26E177E3A3F719D7C6884 /* Pods_Belote_ScoreKeeper.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		61F10D4E36B3ACAA8F5A163C /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				A0B49EBEC8DC2B8DABBB53E6 /* Pods-Belote ScoreKeeper.debug.xcconfig */,
+				88CD1BD5E9537483249B350A /* Pods-Belote ScoreKeeper.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		D40F92007F74575E6735D9D4 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				022BFEDA1979A25D0B964BA0 /* Pods_Belote_ScoreKeeper.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		DB4FA2D41C673EAB00E57557 = {
+			isa = PBXGroup;
+			children = (
+				DBCEE2271C71BB30001461E0 /* Podfile */,
+				DB4FA2DF1C673EAB00E57557 /* Belote ScoreKeeper */,
+				DB4FA2DE1C673EAB00E57557 /* Products */,
+				61F10D4E36B3ACAA8F5A163C /* Pods */,
+				D40F92007F74575E6735D9D4 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		DB4FA2DE1C673EAB00E57557 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				DB4FA2DD1C673EAB00E57557 /* Belote ScoreKeeper.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		DB4FA2DF1C673EAB00E57557 /* Belote ScoreKeeper */ = {
+			isa = PBXGroup;
+			children = (
+				DBCEE2251C71AA84001461E0 /* ViewController.swift */,
+				DB4FA2E01C673EAB00E57557 /* AppDelegate.swift */,
+				DB4FA2E41C673EAB00E57557 /* Main.storyboard */,
+				DB4FA2E71C673EAB00E57557 /* Assets.xcassets */,
+				DB4FA2E91C673EAB00E57557 /* LaunchScreen.storyboard */,
+				DB4FA2EC1C673EAB00E57557 /* Info.plist */,
+			);
+			path = "Belote ScoreKeeper";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		DB4FA2DC1C673EAB00E57557 /* Belote ScoreKeeper */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DB4FA2EF1C673EAB00E57557 /* Build configuration list for PBXNativeTarget "Belote ScoreKeeper" */;
+			buildPhases = (
+				D710DFAA6763BF2AA5CA64DA /* [CP] Check Pods Manifest.lock */,
+				DB4FA2D91C673EAB00E57557 /* Sources */,
+				DB4FA2DA1C673EAB00E57557 /* Frameworks */,
+				DB4FA2DB1C673EAB00E57557 /* Resources */,
+				762EEF1B3FA09568D91ADE03 /* [CP] Embed Pods Frameworks */,
+				5731ED12B3C73759188D9A4D /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Belote ScoreKeeper";
+			productName = "Belote ScoreKeeper";
+			productReference = DB4FA2DD1C673EAB00E57557 /* Belote ScoreKeeper.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		DB4FA2D51C673EAB00E57557 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0720;
+				LastUpgradeCheck = 0800;
+				ORGANIZATIONNAME = "Revenge Apps Inc.";
+				TargetAttributes = {
+					DB4FA2DC1C673EAB00E57557 = {
+						CreatedOnToolsVersion = 7.2;
+						DevelopmentTeam = VQZS98JBV8;
+						LastSwiftMigration = 0800;
+					};
+				};
+			};
+			buildConfigurationList = DB4FA2D81C673EAB00E57557 /* Build configuration list for PBXProject "Belote ScoreKeeper" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = DB4FA2D41C673EAB00E57557;
+			productRefGroup = DB4FA2DE1C673EAB00E57557 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				DB4FA2DC1C673EAB00E57557 /* Belote ScoreKeeper */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		DB4FA2DB1C673EAB00E57557 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DB4FA2EB1C673EAB00E57557 /* LaunchScreen.storyboard in Resources */,
+				DB4FA2E81C673EAB00E57557 /* Assets.xcassets in Resources */,
+				DB4FA2E61C673EAB00E57557 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		5731ED12B3C73759188D9A4D /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Belote ScoreKeeper/Pods-Belote ScoreKeeper-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		762EEF1B3FA09568D91ADE03 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Belote ScoreKeeper/Pods-Belote ScoreKeeper-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D710DFAA6763BF2AA5CA64DA /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		DB4FA2D91C673EAB00E57557 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DBCEE2261C71AA84001461E0 /* ViewController.swift in Sources */,
+				DB4FA2E11C673EAB00E57557 /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		DB4FA2E41C673EAB00E57557 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DB4FA2E51C673EAB00E57557 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		DB4FA2E91C673EAB00E57557 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DB4FA2EA1C673EAB00E57557 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		DB4FA2ED1C673EAB00E57557 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		DB4FA2EE1C673EAB00E57557 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				ONLY_ACTIVE_ARCH = NO;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		DB4FA2F01C673EAB00E57557 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = A0B49EBEC8DC2B8DABBB53E6 /* Pods-Belote ScoreKeeper.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = VQZS98JBV8;
+				ENABLE_BITCODE = NO;
+				INFOPLIST_FILE = "Belote ScoreKeeper/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.gulyan.beloteScoreKeeper;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		DB4FA2F11C673EAB00E57557 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 88CD1BD5E9537483249B350A /* Pods-Belote ScoreKeeper.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = VQZS98JBV8;
+				ENABLE_BITCODE = NO;
+				INFOPLIST_FILE = "Belote ScoreKeeper/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				ONLY_ACTIVE_ARCH = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = com.gulyan.beloteScoreKeeper;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		DB4FA2D81C673EAB00E57557 /* Build configuration list for PBXProject "Belote ScoreKeeper" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DB4FA2ED1C673EAB00E57557 /* Debug */,
+				DB4FA2EE1C673EAB00E57557 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		DB4FA2EF1C673EAB00E57557 /* Build configuration list for PBXNativeTarget "Belote ScoreKeeper" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DB4FA2F01C673EAB00E57557 /* Debug */,
+				DB4FA2F11C673EAB00E57557 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = DB4FA2D51C673EAB00E57557 /* Project object */;
+}
