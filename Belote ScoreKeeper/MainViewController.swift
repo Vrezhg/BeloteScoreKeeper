@@ -66,7 +66,6 @@ final class MainViewController: UIViewController , GADInterstitialDelegate {
         textField.addTarget(self,
                             action: #selector(teamTwoTextDidChange(_:)),
                             for: .editingDidEnd)
-        
         return textField
     }()
     
