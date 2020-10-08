@@ -248,16 +248,20 @@ final class MainViewController: UIViewController , GADInterstitialDelegate {
         // checks that this isnt the first row , neither this textField or previous one is blank and that the value of current textField has been changed
         if let previousRow = scoreTable.cellForRow(at: IndexPath(row: tag - 1, section: 0)) as? ScoreTableViewRow {
             let previousRowFirstColumn = previousRow.firstColumn
-            if valueDidChange && previousRowFirstColumn.text?.isEmpty == false {
-                if let currentColumnText = textField.text,
-                    let currentColumnScore = Int(currentColumnText),
-                    let previousColumnText = previousRowFirstColumn.text,
-                    let previousColumnScore = Int(previousColumnText) {
-                    let newScore = String(previousColumnScore + currentColumnScore)
-                    textField.text = newScore
-                    
-                    pref.set(newScore, forKey: "row\(tag)column1")
-                    valueDidChange = false
+            if valueDidChange {
+                if previousRowFirstColumn.text?.isEmpty == false {
+                    if let currentColumnText = textField.text,
+                        let currentColumnScore = Int(currentColumnText),
+                        let previousColumnText = previousRowFirstColumn.text,
+                        let previousColumnScore = Int(previousColumnText) {
+                        let newScore = String(previousColumnScore + currentColumnScore)
+                        textField.text = newScore
+                        
+                        pref.set(newScore, forKey: "row\(tag)column1")
+                        valueDidChange = false
+                    }
+                } else {
+                    pref.set(textField.text, forKey: "row\(tag)column1")
                 }
             }
         }
@@ -270,16 +274,20 @@ final class MainViewController: UIViewController , GADInterstitialDelegate {
         tag = textField.tag
         if let previousRow = scoreTable.cellForRow(at: IndexPath(row: tag - 1, section: 0)) as? ScoreTableViewRow {
             let previousRowSecondColumn = previousRow.secondColumn
-            if valueDidChange && previousRowSecondColumn.text?.isEmpty == false {
-                if let currentColumnText = textField.text,
-                    let currentColumnScore = Int(currentColumnText),
-                    let previousColumnText = previousRowSecondColumn.text,
-                    let previousColumnScore = Int(previousColumnText) {
-                    let newScore = String(previousColumnScore + currentColumnScore)
-                    textField.text = newScore
-                    
-                    pref.set(newScore, forKey: "row\(tag)column2")
-                    valueDidChange = false
+            if valueDidChange {
+                if previousRowSecondColumn.text?.isEmpty == false {
+                    if let currentColumnText = textField.text,
+                        let currentColumnScore = Int(currentColumnText),
+                        let previousColumnText = previousRowSecondColumn.text,
+                        let previousColumnScore = Int(previousColumnText) {
+                        let newScore = String(previousColumnScore + currentColumnScore)
+                        textField.text = newScore
+                        
+                        pref.set(newScore, forKey: "row\(tag)column2")
+                        valueDidChange = false
+                    }
+                } else {
+                    pref.set(textField.text, forKey: "row\(tag)column2")
                 }
             }
         }
