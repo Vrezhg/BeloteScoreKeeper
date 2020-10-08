@@ -108,7 +108,14 @@ final class MainViewController: UIViewController , GADInterstitialDelegate {
     
     var interstitial : GADInterstitial!
     var tap: UITapGestureRecognizer = UITapGestureRecognizer()
-
+    
+    var clearPressed = false
+    
+    lazy var adTimer: Timer = {
+        let timer = Timer.scheduledTimer(timeInterval: 15, target: self, selector: #selector(presentInterstitialAd), userInfo: nil, repeats: true)
+        return timer
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         displayDismissableAlert(title: "How to use",
@@ -120,6 +127,7 @@ final class MainViewController: UIViewController , GADInterstitialDelegate {
         
         setupSubviews()
         setupConstraints()
+        Timer.scheduledTimer(timeInterval: 90, target: self, selector: #selector(presentInterstitialAd), userInfo: nil, repeats: true)
     }
     
     private func setupSubviews() {
@@ -186,7 +194,10 @@ final class MainViewController: UIViewController , GADInterstitialDelegate {
 
     func interstitialDidDismissScreen(_ ad: GADInterstitial) {
         interstitial = createAndLoadInterstitial()
-        showClearDialog()
+        if clearPressed {
+            showClearDialog()
+            clearPressed = false
+        }
     }
 
     func showClearDialog() {
@@ -284,7 +295,14 @@ final class MainViewController: UIViewController , GADInterstitialDelegate {
         view.endEditing(true)
     }
     
+    @objc func presentInterstitialAd() {
+        if interstitial.isReady {
+            interstitial.present(fromRootViewController: self)
+        }
+    }
+    
     @objc func clearButtonPressed() {
+        clearPressed = true
         if interstitial.isReady {
             interstitial.present(fromRootViewController: self)
         } else {
