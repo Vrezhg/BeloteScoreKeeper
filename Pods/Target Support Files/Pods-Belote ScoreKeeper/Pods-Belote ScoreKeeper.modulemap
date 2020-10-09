@@ -1,6 +1,0 @@
-framework module Pods_Belote_ScoreKeeper {
-  umbrella header "Pods-Belote ScoreKeeper-umbrella.h"
-
-  export *
-  module * { export * }
-}
