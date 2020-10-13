@@ -7,6 +7,7 @@
 //
 
 import GoogleMobileAds
+import Purchases
 import SnapKit
 import UIKit
 
@@ -110,13 +111,21 @@ final class MainViewController: UIViewController , GADInterstitialDelegate {
     
     var clearPressed = false
     
-    lazy var adTimer: Timer = {
-        let timer = Timer.scheduledTimer(timeInterval: 15, target: self, selector: #selector(presentInterstitialAd), userInfo: nil, repeats: true)
-        return timer
-    }()
+    var tapCount: Int = 0 {
+        didSet {
+            if tapCount % 10 == 0 {
+                presentInterstitialAd()
+            }
+        }
+    }
+    
+    var isSubscribed: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        if #available(iOS 13.0, *) {
+            overrideUserInterfaceStyle = .light
+        }
         displayDismissableAlert(title: "How to use",
                                 message: "Enter the score to be added on each row and when you're done it will be added for you!")
         interstitial = createAndLoadInterstitial()
@@ -124,17 +133,50 @@ final class MainViewController: UIViewController , GADInterstitialDelegate {
         tap = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         view.addGestureRecognizer(tap)
         
+        if Purchases.canMakePayments() {
+            showNoAdsButton(true)
+        }
+        showAds(true)
+        
+        checkForSubscriptionStatus()
+        
         setupSubviews()
         setupConstraints()
-        Timer.scheduledTimer(timeInterval: 90, target: self, selector: #selector(presentInterstitialAd), userInfo: nil, repeats: true)
+    }
+    
+    private func checkForSubscriptionStatus() {
+        Purchases.shared.purchaserInfo { [weak self] (purchaserInfo, error) in
+            if let error = error {
+                print("Error: \(error.localizedDescription)")
+                self?.showNoAdsButton(false)
+            } else {
+                if let proEntitlement = purchaserInfo?.entitlements["Pro"] {
+                    if proEntitlement.isActive {
+                        self?.isSubscribed = true
+                        self?.showNoAdsButton(false)
+                        self?.showAds(false)
+                    } else {
+                        self?.isSubscribed = false
+                        if Purchases.canMakePayments() {
+                            self?.showNoAdsButton(true)
+                        }
+                        self?.showAds(true)
+                    }
+                } else {
+                    self?.isSubscribed = false
+                    if Purchases.canMakePayments() {
+                        self?.showNoAdsButton(true)
+                    }
+                    self?.showAds(true)
+                }
+            }
+        }
     }
     
     private func setupSubviews() {
         view.addSubview(titleLabel)
-//        view.addSubview(noAdsButton)
         view.addSubview(headerStack)
         view.addSubview(scoreTable)
-        view.addSubview(bannerView)
         
         headerStack.addArrangedSubview(teamOneTextField)
         headerStack.addArrangedSubview(teamTwoTextField)
@@ -148,12 +190,6 @@ final class MainViewController: UIViewController , GADInterstitialDelegate {
             make.centerX.equalToSuperview()
             make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(8)
         }
-        
-//        noAdsButton.snp.makeConstraints { make in
-//            make.width.height.equalTo(45)
-//            make.top.equalTo(view.safeAreaLayoutGuide.snp.top)
-//            make.trailing.equalToSuperview().offset(-20)
-//        }
         
         teamOneTextField.snp.makeConstraints { make in
             make.width.equalTo(85)
@@ -169,17 +205,54 @@ final class MainViewController: UIViewController , GADInterstitialDelegate {
             make.trailing.equalToSuperview().offset(-40)
         }
         
-        bannerView.snp.makeConstraints { make in
-            make.width.equalTo(320)
-            make.height.equalTo(50)
-            make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).offset(10)
-            make.centerX.equalToSuperview()
-        }
-        
         scoreTable.snp.makeConstraints { make in
             make.top.equalTo(headerStack.snp.bottom).offset(25)
-            make.bottom.equalTo(bannerView.snp.top).offset(-25)
+            make.bottom.equalTo(isSubscribed ? view.safeAreaLayoutGuide.snp.bottom : bannerView.snp.top).offset(-25)
             make.leading.trailing.equalToSuperview()
+        }
+    }
+    
+    private func showNoAdsButton(_ show: Bool) {
+        if show {
+            if view.subviews.contains(noAdsButton) == false {
+                view.addSubview(noAdsButton)
+                noAdsButton.snp.makeConstraints { make in
+                    make.width.height.equalTo(45)
+                    make.top.equalTo(view.safeAreaLayoutGuide.snp.top)
+                    make.trailing.equalToSuperview().offset(-20)
+                }
+            }
+        } else {
+            noAdsButton.removeFromSuperview()
+        }
+    }
+    
+    private func showAds(_ show: Bool) {
+        if show {
+            view.addSubview(bannerView)
+            bannerView.snp.makeConstraints { make in
+                make.width.equalTo(320)
+                make.height.equalTo(50)
+                make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).offset(10)
+                make.centerX.equalToSuperview()
+            }
+            
+            guard view.subviews.contains(scoreTable) else { return }
+            scoreTable.snp.remakeConstraints { make in
+                make.top.equalTo(headerStack.snp.bottom).offset(25)
+                make.bottom.equalTo(isSubscribed ? view.safeAreaLayoutGuide.snp.bottom : bannerView.snp.top).offset(-25)
+                make.leading.trailing.equalToSuperview()
+            }
+            
+        } else {
+            bannerView.removeFromSuperview()
+            
+            guard view.subviews.contains(scoreTable) else { return }
+            scoreTable.snp.remakeConstraints { make in
+                make.top.equalTo(headerStack.snp.bottom).offset(25)
+                make.bottom.equalTo(isSubscribed ? view.safeAreaLayoutGuide.snp.bottom : bannerView.snp.top).offset(-25)
+                make.leading.trailing.equalToSuperview()
+            }
         }
     }
 
@@ -209,9 +282,8 @@ final class MainViewController: UIViewController , GADInterstitialDelegate {
         alert.addAction(UIAlertAction(title: "CONFIRM",
                                       style: .default,
                                       handler: { (UIAlertAction) -> Void in
-            self.teamOneTextField.text = ""
-            self.teamTwoTextField.text = ""
-        
+
+            // clear saved data from user preferences
             self.pref.removeObject(forKey: "team1")
             self.pref.removeObject(forKey: "team2")
             var i = 0
@@ -221,6 +293,9 @@ final class MainViewController: UIViewController , GADInterstitialDelegate {
                 self.pref.removeObject(forKey: "row\(i)")
                 i += 1
             }
+            // clear fields in ui
+            self.teamOneTextField.text = ""
+            self.teamTwoTextField.text = ""
             self.scoreTable.reloadData()
         }))
         present(alert, animated: true, completion: nil)
@@ -241,25 +316,34 @@ final class MainViewController: UIViewController , GADInterstitialDelegate {
     
     //adds column 1 scores for indicated rows
     @objc func column1TextFieldTextDidEndEditingNotification(_ textField: UITextField) {
-        guard textField.tag != 0,
-            textField.text?.isEmpty == false else { return }
+        tapCount += 1
         tag = textField.tag
-        // checks that this isnt the first row , neither this textField or previous one is blank and that the value of current textField has been changed
+        
+        if tag == 0 && valueDidChange {
+            pref.set(textField.text, forKey: "row\(tag)column1")
+            return
+        }
+        
+        // fetch previous row
         if let previousRow = scoreTable.cellForRow(at: IndexPath(row: tag - 1, section: 0)) as? ScoreTableViewRow {
             let previousRowFirstColumn = previousRow.firstColumn
+            // we only add when the value changed, otherwise we would infinitely keep adding
             if valueDidChange {
-                if previousRowFirstColumn.text?.isEmpty == false {
+                if previousRowFirstColumn.text?.isEmpty == false
+                    && textField.text?.isEmpty == false {
                     if let currentColumnText = textField.text,
                         let currentColumnScore = Int(currentColumnText),
                         let previousColumnText = previousRowFirstColumn.text,
                         let previousColumnScore = Int(previousColumnText) {
                         let newScore = String(previousColumnScore + currentColumnScore)
-                        textField.text = newScore
                         
+                        // set the new value for the textfield, save it and reset value didChange
+                        textField.text = newScore
                         pref.set(newScore, forKey: "row\(tag)column1")
                         valueDidChange = false
                     }
                 } else {
+                    // save the value change as long as it changed
                     pref.set(textField.text, forKey: "row\(tag)column1")
                 }
             }
@@ -268,6 +352,7 @@ final class MainViewController: UIViewController , GADInterstitialDelegate {
     
     //adds column 2 scores for indicated rows
     @objc func column2TextFieldTextDidEndEditingNotification(_ textField: UITextField) {
+        tapCount += 1
         guard textField.tag != 0,
             textField.text?.isEmpty == false else { return }
         tag = textField.tag
@@ -293,6 +378,7 @@ final class MainViewController: UIViewController , GADInterstitialDelegate {
     }
     
     @objc func wagerTextFieldTextDidEndEditingNotification(_ textField: UITextField) {
+        tapCount += 1
         if let scoreColumn = scoreTable.cellForRow(at: IndexPath(row: textField.tag, section: 0)) as? ScoreTableViewRow {
             pref.set(scoreColumn.wagerColumn.text, forKey: "row\(textField.tag)")
         }
@@ -310,7 +396,7 @@ final class MainViewController: UIViewController , GADInterstitialDelegate {
     
     @objc func clearButtonPressed() {
         clearPressed = true
-        if interstitial.isReady {
+        if !isSubscribed && interstitial.isReady {
             interstitial.present(fromRootViewController: self)
         } else {
             showClearDialog()
@@ -319,10 +405,17 @@ final class MainViewController: UIViewController , GADInterstitialDelegate {
     
     @objc func noAdsButtonsPressed() {
         let upsellViewContoller = UpsellViewController()
+        upsellViewContoller.delegate = self
         upsellViewContoller.modalPresentationStyle = .overFullScreen
         present(upsellViewContoller,
                 animated: true,
                 completion: nil)
+    }
+}
+
+extension MainViewController: UpsellDelegate {
+    func statusUpdated() {
+        checkForSubscriptionStatus()
     }
 }
 
@@ -363,20 +456,5 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
         cell.wagerColumn.text = pref.string(forKey: "row\(indexPath.row)")
         
         return cell
-    }
-}
-
-extension UIViewController {
-    public func displayDismissableAlert(title: String, message: String) {
-        let alert = UIAlertController(title: title,
-                                      message: message,
-                                      preferredStyle: .alert)
-        let action = UIAlertAction(title: "Ok",
-                                   style: .default,
-                                   handler: nil)
-        alert.addAction(action)
-        present(alert,
-                animated: true,
-                completion: nil)
     }
 }

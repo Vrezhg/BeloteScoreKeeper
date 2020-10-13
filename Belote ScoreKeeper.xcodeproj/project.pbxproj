@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		6FC8A9E20AD0A3BA24EACD8C /* Pods_Belote_ScoreKeeper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B25B0B34C379719E87EA8910 /* Pods_Belote_ScoreKeeper.framework */; };
+		A6169B692535AAFA0098EA7F /* UIViewController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6169B682535AAFA0098EA7F /* UIViewController+Extensions.swift */; };
 		A650F35C252A8D9E00ABD15E /* ScoreTableViewRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = A650F35B252A8D9E00ABD15E /* ScoreTableViewRow.swift */; };
 		A688D8C524FCC66B00A51FC8 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A688D8C424FCC66B00A51FC8 /* StoreKit.framework */; };
 		A688D8C724FCC6B300A51FC8 /* UpsellViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A688D8C624FCC6B300A51FC8 /* UpsellViewController.swift */; };
@@ -19,6 +20,7 @@
 
 /* Begin PBXFileReference section */
 		478158B3CFB6704101D41A6B /* Pods-Belote ScoreKeeper.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Belote ScoreKeeper.release.xcconfig"; path = "Target Support Files/Pods-Belote ScoreKeeper/Pods-Belote ScoreKeeper.release.xcconfig"; sourceTree = "<group>"; };
+		A6169B682535AAFA0098EA7F /* UIViewController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extensions.swift"; sourceTree = "<group>"; };
 		A650F35B252A8D9E00ABD15E /* ScoreTableViewRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreTableViewRow.swift; sourceTree = "<group>"; };
 		A688D8C424FCC66B00A51FC8 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		A688D8C624FCC6B300A51FC8 /* UpsellViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpsellViewController.swift; sourceTree = "<group>"; };
@@ -90,6 +92,7 @@
 				DBCEE2251C71AA84001461E0 /* MainViewController.swift */,
 				A688D8C624FCC6B300A51FC8 /* UpsellViewController.swift */,
 				A650F35B252A8D9E00ABD15E /* ScoreTableViewRow.swift */,
+				A6169B682535AAFA0098EA7F /* UIViewController+Extensions.swift */,
 				DB4FA2E71C673EAB00E57557 /* Assets.xcassets */,
 				DB4FA2E91C673EAB00E57557 /* LaunchScreen.storyboard */,
 				DB4FA2EC1C673EAB00E57557 /* Info.plist */,
@@ -225,6 +228,7 @@
 			files = (
 				A688D8C724FCC6B300A51FC8 /* UpsellViewController.swift in Sources */,
 				A650F35C252A8D9E00ABD15E /* ScoreTableViewRow.swift in Sources */,
+				A6169B692535AAFA0098EA7F /* UIViewController+Extensions.swift in Sources */,
 				DBCEE2261C71AA84001461E0 /* MainViewController.swift in Sources */,
 				DB4FA2E11C673EAB00E57557 /* AppDelegate.swift in Sources */,
 			);
@@ -291,7 +295,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -340,7 +344,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				ONLY_ACTIVE_ARCH = NO;
 				SDKROOT = iphoneos;

@@ -11,7 +11,13 @@ import Purchases
 import SnapKit
 import UIKit
 
+protocol UpsellDelegate: AnyObject {
+    func statusUpdated()
+}
+
 final class UpsellViewController: UIViewController {
+    
+    weak var delegate: UpsellDelegate?
     
     lazy var blurredEffectView: UIView = {
         let blurEffect = UIBlurEffect(style: .light)
@@ -44,7 +50,7 @@ final class UpsellViewController: UIViewController {
     
     lazy var priceLabel: UILabel = {
         let label = UILabel()
-        label.text = "Unlock the ad-free version of this app for only $1.99"
+        label.text = "Unlock the ad-free version of this app for only \(price)"
         label.font = UIFont(name: "Noteworthy-Bold", size: 18)
         label.textColor = .black
         label.textAlignment = .center
@@ -61,7 +67,10 @@ final class UpsellViewController: UIViewController {
         button.backgroundColor = .black
         button.layer.cornerRadius = 15
         button.clipsToBounds = true
-        
+        button.isEnabled = false
+        button.addTarget(self,
+                         action: #selector(unlockButtonPressed),
+                         for: .touchUpInside)
         return button
     }()
     
@@ -71,29 +80,31 @@ final class UpsellViewController: UIViewController {
         button.setTitle("Restore Purchase",
                         for: .normal)
         button.titleLabel?.font = UIFont(name: "Noteworthy-Bold", size: 14)
+        button.addTarget(self,
+                         action: #selector(restorePurchasesButtonPressed),
+                         for: .touchUpInside)
         return button
     }()
     
     var nonConsumablePurchaseMade = UserDefaults.standard.bool(forKey: "nonConsumablePurchaseMade")
     
+    lazy var price: String = ""
+    
+    var currentProduct: SKProduct? = nil
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Check your In-App Purchases
-        print("NON CONSUMABLE PURCHASE MADE: \(nonConsumablePurchaseMade)")
-                
-        // messageLabel.text = nonConsumablePurchaseMade ? "Ad-free unlocked!" : "Ad-free version LOCKED!"
-        
-        // Fetch IAP Products available
-        fetchAvailableProducts()
+        if #available(iOS 13.0, *) {
+            overrideUserInterfaceStyle = .light
+        } 
         view.backgroundColor = .clear
-        
+        fetchProduct()
         addSubviews()
         setupConstraints()
     }
     
     func addSubviews() {
-        
         view.addSubview(blurredEffectView)
         view.addSubview(containerView)
         containerView.addSubview(closeButton)
@@ -139,14 +150,18 @@ final class UpsellViewController: UIViewController {
         }
     }
     
-    func fetchAvailableProducts() {
-        Purchases.shared.products(["no_ads"]) { products in
-            print("Current products: \(products)")
-        }
-        Purchases.shared.offerings { (offerings, error) in
-            if let offerings = offerings {
-                print("Current offerings: \(offerings.all)")
-          }
+    func fetchProduct() {
+        Purchases.shared.offerings { [weak self] (offerings, error) in
+            if let product = offerings?.current?.availablePackages.first?.product {
+                let numberFormatter = NumberFormatter()
+                numberFormatter.locale = product.priceLocale
+                numberFormatter.numberStyle = .currency
+                self?.currentProduct = product
+                self?.price = numberFormatter.string(from: product.price) ?? "1.99"
+                self?.unlockNoAdsButton.isEnabled = true
+            } else {
+                self?.priceLabel.text = "There are no in app purchases available currently, please try again later"
+            }
         }
     }
     
@@ -160,35 +175,33 @@ final class UpsellViewController: UIViewController {
     }
     
     @objc func unlockButtonPressed() {
-        
+        if let currentProduct = currentProduct {
+            Purchases.shared.purchaseProduct(currentProduct) { [weak self] (transaction, purchaserInfo, error, userCancelled) in
+                if userCancelled || error != nil {
+                    self?.displayDismissableAlert(title: "Something went wrong", message: error?.localizedDescription)
+                } else {
+                    if let state = transaction?.transactionState {
+                        switch state {
+                        case .purchased:
+                            self?.delegate?.statusUpdated()
+                            self?.dismiss(animated: true, completion: nil)
+                        default:
+                            self?.displayDismissableAlert(title: "Something went wrong", message: "")
+                        }
+                    }
+                 }
+            }
+        }
     }
     
     @objc func restorePurchasesButtonPressed() {
-        
-    }
-    
-    // MARK: - MAKE PURCHASE OF A PRODUCT
-    func canMakePurchases() -> Bool {
-        return false
-    }
-    
-    func purchaseMyProduct() {
-        if self.canMakePurchases() {
-            
-            // IAP Purchases dsabled on the Device
-        } else {
-//            displayDismissableAlert(title: "Failure",
-//                                    message: "Purchases are disabled on your device!")
+        Purchases.shared.restoreTransactions { [weak self] (_, error) in
+            if let error = error {
+                self?.displayDismissableAlert(title: "Something went wrong", message: error.localizedDescription)
+            } else {
+                self?.delegate?.statusUpdated()
+                self?.dismiss(animated: true, completion: nil)
+            }
         }
-    }
-   
-    
-    
-    func paymentQueueRestoreCompletedTransactionsFinished() {
-        nonConsumablePurchaseMade = true
-        UserDefaults.standard.set(nonConsumablePurchaseMade,
-                                  forKey: "nonConsumablePurchaseMade")
-//        displayDismissableAlert(title: "Success",
-//                                message: "You've successfully restored your purchase!")
     }
 }
