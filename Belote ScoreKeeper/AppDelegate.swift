@@ -20,7 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         GADMobileAds.sharedInstance().start(completionHandler: nil)
         Purchases.debugLogsEnabled = true
-        Purchases.configure(withAPIKey: "GKRaXAAQwLFxYlHgJJPgmxPZoCyuWTWI")
+        Purchases.configure(withAPIKey: "GKRaXAAQwLFxYlHgJJPgmxPZoCyuWTWI", appUserID: UIDevice.current.identifierForVendor?.uuidString)
         UIApplication.shared.isIdleTimerDisabled = true
         
         window = UIWindow(frame: UIScreen.main.bounds)
